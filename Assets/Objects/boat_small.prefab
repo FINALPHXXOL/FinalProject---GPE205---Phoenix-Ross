@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1419320563700439045}
   - component: {fileID: 1419320563701439173}
   - component: {fileID: 6399787518958380287}
+  - component: {fileID: -168504501038050409}
   m_Layer: 0
   m_Name: boat_small
   m_TagString: Untagged
@@ -97,3 +98,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8.925, y: 3.5, z: 14.825916}
   m_Center: {x: 0, y: 1.75, z: -0.11446214}
+--- !u!64 &-168504501038050409
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419320563703628805}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: e7ac658cbcc8b86428c0aef58879f4cd, type: 3}

@@ -206,6 +206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4248455654901434007}
   - component: {fileID: 9036765017016345875}
+  - component: {fileID: -3351570267841168838}
   m_Layer: 0
   m_Name: palm_detailed_short
   m_TagString: Untagged
@@ -243,3 +244,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 14, z: 3}
   m_Center: {x: 8, y: 7, z: 7}
+--- !u!64 &-3351570267841168838
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4248455654901144247}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}

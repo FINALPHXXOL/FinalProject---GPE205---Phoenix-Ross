@@ -47,7 +47,7 @@ MonoBehaviour:
   pawn: {fileID: 0}
   UIScore: {fileID: 0}
   UILives: {fileID: 0}
-  lives: 0
+  lives: 1
   score: 0
   moveForwardKey: 119
   moveBackwardKey: 115

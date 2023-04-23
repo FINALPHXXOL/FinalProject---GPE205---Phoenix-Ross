@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 355530040185540724}
   - component: {fileID: 2525375872860267710}
   - component: {fileID: 5385565429370323146}
+  - component: {fileID: 5110707779649407997}
   m_Layer: 0
   m_Name: SandBarrier_28_v1
   m_TagString: Untagged
@@ -97,3 +98,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.3689471, y: 1.7352217, z: 1.3685061}
   m_Center: {x: 0.00004395843, y: 0.85016245, z: -0.00022652748}
+--- !u!64 &5110707779649407997
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4038342973296084331}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 893437227785219881, guid: 37737cbe47b83c4408bdd9976afc03bb, type: 3}

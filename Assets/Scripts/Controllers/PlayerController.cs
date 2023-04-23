@@ -51,6 +51,8 @@ public class PlayerController : Controller
 
     public override void RespawnPlayer()
     {
+        GameManager.instance.playerSpawnTransform = GameManager.instance.FindRandomSpawn<PlayerSpawnPoint>(GameManager.instance.playerSpawns);
+
         GameObject newPawnObj = Instantiate(GameManager.instance.piratePawnPrefab, GameManager.instance.playerSpawnTransform.position, GameManager.instance.playerSpawnTransform.rotation);
 
         Pawn newPawn = newPawnObj.GetComponent<Pawn>();
@@ -104,6 +106,7 @@ public class PlayerController : Controller
         {
             if (GameManager.instance != null)
             {
+                Debug.Log("GAME OVER!!!!");
                             //GameManager.instance.ActivateGameOver();
             }
         }
@@ -138,6 +141,11 @@ public class PlayerController : Controller
         if (Input.GetKeyDown(sneakKey))
         {
             pawn.Sneak();
+        }
+
+        if (Input.GetKeyUp(sneakKey))
+        {
+            pawn.StopSneak();
         }
     }
 }

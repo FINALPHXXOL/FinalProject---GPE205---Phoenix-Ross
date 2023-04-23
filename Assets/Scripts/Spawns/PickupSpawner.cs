@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class PickupSpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public bool hasBeenUsed;
+    public void Start()
     {
-        
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.pickupSpawns.Add(this);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnDestroy()
     {
-        
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.pickupSpawns.Remove(this);
+        }
     }
 }

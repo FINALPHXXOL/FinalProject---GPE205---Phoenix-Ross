@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5503317570454310554}
   - component: {fileID: 7762870288022813264}
   - component: {fileID: 5892112816216940001}
+  - component: {fileID: -2694291111138820003}
   m_Layer: 0
   m_Name: WoodenBarrier_09_v1
   m_TagString: Untagged
@@ -97,3 +98,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.1791344, y: 1.6066618, z: 1.21733}
   m_Center: {x: -0.0120682735, y: 0.66841394, z: -0.004691661}
+--- !u!64 &-2694291111138820003
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8123294254906153861}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8430925605481246473, guid: c15c8257712a538499f0877d29e23f41, type: 3}

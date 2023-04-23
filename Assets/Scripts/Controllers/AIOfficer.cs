@@ -1,0 +1,62 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using static AIController;
+using static UnityEngine.GraphicsBuffer;
+
+public class AIOfficer : AIController
+{
+    // Start is called before the first frame update
+    public override void Start()
+    {
+        base.Start();
+    }
+
+    // Update is called once per frame
+    public override void Update()
+    {
+        base.Update();
+    }
+
+    public override void MakeDecisions()
+    {
+        switch (currentState)
+        {
+            case AIState.Chase:
+                // Do work
+                TargetNearestPirate();
+                DoChaseState();
+                // Check for transitions
+                if (target == null || (!IsDistanceLessThan(target, (viewDistance * 1.25f)) || (!CanSee(target))) && !CanHear(target))
+                {
+                    ChangeState(AIState.Patrol);
+                }
+                break;
+            case AIState.Patrol:
+                TargetNearestPirate();
+                Patrol();
+                if (target != null)
+                {
+                    if ((IsDistanceLessThan(target, viewDistance) && (CanSee(target))) || CanHear(target))
+                    {
+                        ChangeState(AIState.Chase);
+                    }
+                }
+                break;
+            case AIState.ChooseTarget:
+                TargetNearestPirate();
+                if (target != null)
+                {
+                    if ((IsDistanceLessThan(target, viewDistance) && (CanSee(target))) || CanHear(target))
+                    {
+                        ChangeState(AIState.Chase);
+                    }
+                }
+                if (target == null || (!CanSee(target) && !CanHear(target)))
+                {
+                    ChangeState(AIState.Patrol);
+                }
+                break;
+        }
+    }
+}

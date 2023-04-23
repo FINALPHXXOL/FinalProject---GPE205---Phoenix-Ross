@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7957365420157113259}
   - component: {fileID: 7957365420156014955}
   - component: {fileID: 215945596178246212}
+  - component: {fileID: 7009475808746964177}
   m_Layer: 0
   m_Name: formation_rock
   m_TagString: Untagged
@@ -98,3 +99,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10.59851, y: 12.2475, z: 10.67125}
   m_Center: {x: 5.299255, y: 6.12375, z: 5.335625}
+--- !u!64 &7009475808746964177
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7957365420154081195}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: beca96187d33b6d4f9bcbf420499a905, type: 3}

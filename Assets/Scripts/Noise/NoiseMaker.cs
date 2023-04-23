@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NoiseMaker : MonoBehaviour
 {
@@ -8,9 +9,14 @@ public class NoiseMaker : MonoBehaviour
     public float volumeDistanceDefault;
     private float timeUntilNextEvent;
 
+    public Image noiseCircle;
+
+
     public void Start()
     {
         timeUntilNextEvent = 0f;
+        RectTransform rectTransform = noiseCircle.GetComponent<RectTransform>();
+        rectTransform.sizeDelta = new Vector2((volumeDistance), (volumeDistance));
     }
     public void Update()
     {
@@ -18,14 +24,28 @@ public class NoiseMaker : MonoBehaviour
         if (timeUntilNextEvent < 0)
         {
             volumeDistance = 0;
+            RectTransform rectTransform = noiseCircle.GetComponent<RectTransform>();
+            rectTransform.sizeDelta = new Vector2((volumeDistance), (volumeDistance));
         }
+    }
+    public void StopNoise()
+    {
+        volumeDistance = 0;
+        RectTransform rectTransform = noiseCircle.GetComponent<RectTransform>();
+        rectTransform.sizeDelta = new Vector2((volumeDistance), (volumeDistance));
     }
     public void MakeNoise(float amount)
     {
         if (amount >= volumeDistance)
         {
+            Debug.Log("Is it working");
             volumeDistance = amount;
-            timeUntilNextEvent = 5;
+            if (noiseCircle != null)
+            {
+                RectTransform rectTransform = noiseCircle.GetComponent<RectTransform>();
+                rectTransform.sizeDelta = new Vector2((volumeDistance * 3), (volumeDistance * 3));
+            }
+            timeUntilNextEvent = 1f;
         }
     }
 }
