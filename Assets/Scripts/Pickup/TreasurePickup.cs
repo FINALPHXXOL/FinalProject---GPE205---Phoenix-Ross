@@ -47,6 +47,7 @@ public class TreasurePickup : Pickup
             if (GameManager.instance.treasure.Count <= 0)
             {
                 Debug.Log("YOU WON!!!!");
+                GameManager.instance.ActivateGameOver();
             }
         }
     }

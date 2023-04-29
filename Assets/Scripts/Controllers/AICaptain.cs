@@ -37,6 +37,10 @@ public class AICaptain : AIController
                 {
                     if ((IsDistanceLessThan(target, viewDistance) && (CanSee(target))) || CanHear(target))
                     {
+                        if (AudioManager.instance != null)
+                        {
+                            AudioManager.instance.PlaySpottedSound();
+                        }
                         ChangeState(AIState.Chase);
                     }
                 }
@@ -47,6 +51,10 @@ public class AICaptain : AIController
                 {
                     if ((IsDistanceLessThan(target, viewDistance) && (CanSee(target))) || CanHear(target))
                     {
+                        if (AudioManager.instance != null)
+                        {
+                            AudioManager.instance.PlaySpottedSound();
+                        }
                         ChangeState(AIState.Chase);
                     }
                 }

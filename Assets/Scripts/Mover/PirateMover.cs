@@ -23,6 +23,6 @@ public class PirateMover : Mover
 
     public override void Rotate(float turnSpeed)
     {
-        transform.Rotate(0, turnSpeed, 0);
+        transform.Rotate(0, turnSpeed * Time.deltaTime, 0);
     }
 }

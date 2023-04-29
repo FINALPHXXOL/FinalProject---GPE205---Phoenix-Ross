@@ -107,7 +107,7 @@ public class PlayerController : Controller
             if (GameManager.instance != null)
             {
                 Debug.Log("GAME OVER!!!!");
-                            //GameManager.instance.ActivateGameOver();
+                GameManager.instance.ActivateGameOver();
             }
         }
         if (UILives != null)

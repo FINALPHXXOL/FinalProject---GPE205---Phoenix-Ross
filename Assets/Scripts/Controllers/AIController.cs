@@ -76,6 +76,10 @@ public class AIController : Controller
                 {
                     if ((IsDistanceLessThan(target, viewDistance) && (CanSee(target))) || CanHear(target))
                     {
+                        if (AudioManager.instance != null)
+                        {
+                            AudioManager.instance.PlaySpottedSound();
+                        }
                         ChangeState(AIState.Chase);
                     }
                 }
@@ -86,6 +90,10 @@ public class AIController : Controller
                 {
                     if ((IsDistanceLessThan(target, viewDistance) && (CanSee(target))) || CanHear(target))
                     {
+                        if (AudioManager.instance != null)
+                        {
+                            AudioManager.instance.PlaySpottedSound();
+                        }
                         ChangeState(AIState.Chase);
                     }
                 }
@@ -291,34 +299,36 @@ public class AIController : Controller
     }
     protected void TargetNearestPirate()
     {
-        // Get a list of all the pirates (pawns)
-
-        if (GameManager.instance.players[0].pawn != null)
+        if (GameManager.instance.players.Count > 0)
         {
-            // Assume that the first pirate is closest
-            Pawn closestPirate = GameManager.instance.players[0].pawn;
-            if (pawn != null)
+            // Get a list of all the pirates (pawns)
+            if (GameManager.instance.players[0].pawn != null)
             {
-                float closestPirateDistance = Vector3.Distance(pawn.transform.position, closestPirate.transform.position);
-
-                // Iterate through them one at a time
-                foreach (PlayerController player in GameManager.instance.players)
+                // Assume that the first pirate is closest
+                Pawn closestPirate = GameManager.instance.players[0].pawn;
+                if (pawn != null)
                 {
-                    if (player != null && player.pawn != null)
+                    float closestPirateDistance = Vector3.Distance(pawn.transform.position, closestPirate.transform.position);
+
+                    // Iterate through them one at a time
+                    foreach (PlayerController player in GameManager.instance.players)
                     {
-                        // If this one is closer than the closest
-                        if (Vector3.Distance(pawn.transform.position, player.pawn.transform.position) <= closestPirateDistance)
+                        if (player != null && player.pawn != null)
                         {
-                            // It is the closest
-                            closestPirate = player.pawn;
-                            closestPirateDistance = Vector3.Distance(pawn.transform.position, closestPirate.transform.position);
+                            // If this one is closer than the closest
+                            if (Vector3.Distance(pawn.transform.position, player.pawn.transform.position) <= closestPirateDistance)
+                            {
+                                // It is the closest
+                                closestPirate = player.pawn;
+                                closestPirateDistance = Vector3.Distance(pawn.transform.position, closestPirate.transform.position);
+                            }
                         }
                     }
+
+                    // Target the closest pirate
+                    target = closestPirate.gameObject;
+
                 }
-
-                // Target the closest pirate
-                target = closestPirate.gameObject;
-
             }
         }
     }

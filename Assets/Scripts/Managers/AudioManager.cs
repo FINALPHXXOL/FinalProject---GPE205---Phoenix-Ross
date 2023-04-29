@@ -5,11 +5,15 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
+
     public AudioSource caughtAudio;
     public AudioClip caughtClip;
 
     public AudioSource pickupAudio;
     public AudioClip pickupClip;
+
+    public AudioSource spottedAudio;
+    public AudioClip spottedClip;
 
     void Awake()
     {
@@ -48,6 +52,14 @@ public class AudioManager : MonoBehaviour
         if (pickupAudio != null)
         {
             pickupAudio.PlayOneShot(pickupClip);
+        }
+    }
+
+    public void PlaySpottedSound()
+    {
+        if (spottedAudio != null)
+        {
+            spottedAudio.PlayOneShot(spottedClip);
         }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CaptainSpawnPoint : MonoBehaviour
 {
+    public Transform[] waypoints;
     public bool hasBeenUsed;
     public void Start()
     {

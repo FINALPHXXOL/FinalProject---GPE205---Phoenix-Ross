@@ -43,7 +43,7 @@ public class NoiseMaker : MonoBehaviour
             if (noiseCircle != null)
             {
                 RectTransform rectTransform = noiseCircle.GetComponent<RectTransform>();
-                rectTransform.sizeDelta = new Vector2((volumeDistance * 3), (volumeDistance * 3));
+                rectTransform.sizeDelta = new Vector2((volumeDistance * 4), (volumeDistance * 4));
             }
             timeUntilNextEvent = 1f;
         }

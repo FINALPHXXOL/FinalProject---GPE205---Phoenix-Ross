@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public Transform playerSpawnTransform;
     public Transform enemyAISpawnTransform;
     public Transform treasureSpawnTransform;
+    public GameObject islandGenerator;
     public List<PlayerController> players;
     public List<AIController> enemyAIs;
     public List<PickupSpawner> pickupSpawns;
@@ -32,8 +33,18 @@ public class GameManager : MonoBehaviour
     public int officerCount;
     public int captainCount;
     public int treasureCount;
+    public int currentLevel = 1;
     private int index;
     private int listlength;
+
+    // Game States
+    public GameObject AllMenus;
+    public GameObject TitleScreenStateObject;
+    public GameObject MainMenuStateObject;
+    public GameObject OptionsScreenStateObject;
+    public GameObject CreditsScreenStateObject;
+    public GameObject GameplayStateObject;
+    public GameObject GameOverScreenStateObject;
     #endregion Variables
 
     // Game States
@@ -60,17 +71,161 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-        Invoke("SpawnPlayer", 1f);
-        Invoke("SpawnAI", 1f);
-        Invoke("SpawnTreasure", 1f);
-        //SpawnPlayer();
-        //SpawnAI();
+        ActivateTitleScreen();
+        
+    }
+
+    private void DeactivateAllStates()
+    {
+        // Deactivate all Game States
+        TitleScreenStateObject.SetActive(false);
+        MainMenuStateObject.SetActive(false);
+        OptionsScreenStateObject.SetActive(false);
+        CreditsScreenStateObject.SetActive(false);
+        GameplayStateObject.SetActive(false);
+        GameOverScreenStateObject.SetActive(false);
+    }
+
+    public void QuitTheGame()
+    {
+#if UNITY_STANDALONE
+        Application.Quit();
+#endif
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+    }
+
+    public void ActivateTitleScreen()
+    {
+        AllMenus.SetActive(true);
+        // Deactivate all states
+        DeactivateAllStates();
+        // Activate the title screen
+        TitleScreenStateObject.SetActive(true);
+    }
+
+    public void ActivateMainMenuScreen()
+    {
+        AllMenus.SetActive(true);
+        // Deactivate all states
+        DeactivateAllStates();
+        // Activate the main menu screen
+        MainMenuStateObject.SetActive(true);
+    }
+
+    public void ActivateOptionsScreen()
+    {
+        AllMenus.SetActive(true);
+        // Deactivate all states
+        DeactivateAllStates();
+        // Activate the options screen
+        OptionsScreenStateObject.SetActive(true);
+    }
+
+    public void ActivateCredits()
+    {
+        AllMenus.SetActive(true);
+        // Deactivate all states
+        DeactivateAllStates();
+        // Activate the credits screen
+        CreditsScreenStateObject.SetActive(true);
+    }
+
+    public void ActivateGameplay()
+    {
+        IslandGenerator map = islandGenerator.GetComponent<IslandGenerator>();
+        map.GenerateIsland();
+
+        // Deactivate all states
+        DeactivateAllStates();
+        AllMenus.SetActive(false);
+        // Activate the gameplay screen
+        GameplayStateObject.SetActive(true);
+    }
+
+    public void ActivateGameOver()
+    {
+        Debug.Log("Why");
+        DestroyAllPlayerControllers();
+        DestroyAllAIControllers();
+        DestroyAllPawns();
+        DestroyAllTreasure();
+
+        IslandGenerator map = islandGenerator.GetComponent<IslandGenerator>();
+        map.DestroyIsland(map.currentLevelPrefab);
+        if (AllMenus != null)
+        {
+            AllMenus.SetActive(true);
+        }
+        
+        // Deactivate all states
+        DeactivateAllStates();
+        // Activate the game over screen
+        GameOverScreenStateObject.SetActive(true);
+    }
+
+    public void DestroyAllPlayerControllers()
+    {
+        // Loop through the list of objects to destroy
+        foreach (PlayerController obj in players)
+        {
+            // Destroy the current object
+            Destroy(obj.gameObject);
+        }
+
+        // Clear the list to remove all references to the destroyed objects
+        //objectsToDestroy.Clear();
+    }
+
+    public void DestroyAllAIControllers()
+    {
+        // Loop through the list of objects to destroy
+        foreach (AIController obj in enemyAIs)
+        {
+            // Destroy the current object
+            Destroy(obj.gameObject);
+        }
+
+        // Clear the list to remove all references to the destroyed objects
+        //objectsToDestroy.Clear();
+    }
+
+    public void DestroyAllTreasure()
+    {
+        TreasurePickup[] objectsToDelete = FindObjectsOfType<TreasurePickup>();
+
+        foreach (TreasurePickup obj in objectsToDelete)
+        {
+            Destroy(obj.gameObject);
+        }
+    }
+
+    public void DestroyAllPawns()
+    {
+        Pawn[] objectsToDelete = FindObjectsOfType<Pawn>();
+
+        foreach (Pawn obj in objectsToDelete)
+        {
+            Destroy(obj.gameObject);
+        }
     }
 
     public Transform FindRandomSpawn<T>(List<T> list) where T : Component
     {
-        Transform itemTransform = list[UnityEngine.Random.Range(0, list.Count)].transform;
-        return itemTransform;
+        T randomT = list[UnityEngine.Random.Range(0, list.Count)];
+
+        GameObject randomObj = randomT.gameObject;
+        
+        Transform itemTransform = randomObj.transform;
+
+        if (!(randomT is PlayerSpawnPoint))
+        {
+            list.Remove(randomT);
+            Destroy(randomObj);
+        }
+
+            return itemTransform;
     }
 
     public void SpawnPlayer()
@@ -116,7 +271,9 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < captainCount; i++)
         {
+            
             enemyAISpawnTransform = FindRandomSpawn<CaptainSpawnPoint>(captainSpawns);
+            
 
             GameObject newAIObj = Instantiate(AICaptainPrefab, Vector3.zero, Quaternion.identity);
             GameObject newPawnObj = Instantiate(CaptainPawnPrefab, enemyAISpawnTransform.position, enemyAISpawnTransform.rotation);
@@ -127,10 +284,18 @@ public class GameManager : MonoBehaviour
             newController.pawn = newPawn;
             newPawn.controller = newController;
 
-            int arrayLength = newController.waypoints.Length;
-            Array.Resize(ref newController.waypoints, arrayLength + 1);
-            newController.waypoints[arrayLength] = enemyAISpawnTransform;
+            CaptainSpawnPoint ways = enemyAISpawnTransform.GetComponent<CaptainSpawnPoint>();
+
+            foreach (Transform obj in ways.waypoints)
+            {
+                int arrayLength = newController.waypoints.Length;
+                Array.Resize(ref newController.waypoints, arrayLength + 1);
+                newController.waypoints[arrayLength] = obj;
+            }
+
+            newController.isPatrolLoop = true;
         }
+        
     }
 
     public void SpawnTreasure()

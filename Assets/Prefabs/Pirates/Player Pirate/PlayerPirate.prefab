@@ -126,7 +126,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4882301448013560856}
   m_LocalRotation: {x: -0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 40, z: 40}
+  m_LocalPosition: {x: 0, y: 42, z: 40}
   m_LocalScale: {x: 1, y: 1, z: -1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -835,10 +835,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be63b685b0011db4c8beea58cd0c17ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultmoveSpeed: 20
+  defaultmoveSpeed: 21
   moveSpeed: 0
-  sneakSpeed: 5
-  turnSpeed: 2
+  sneakSpeed: 12
+  turnSpeed: 120
   mover: {fileID: 23856891090974044}
   controller: {fileID: 0}
   hearingCircle: {fileID: 0}

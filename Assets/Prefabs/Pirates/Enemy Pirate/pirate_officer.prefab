@@ -331,10 +331,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be63b685b0011db4c8beea58cd0c17ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultmoveSpeed: 10
+  defaultmoveSpeed: 10.5
   moveSpeed: 0
   sneakSpeed: 0
-  turnSpeed: 90
+  turnSpeed: 100
   mover: {fileID: 9217762947003444779}
   controller: {fileID: 0}
   hearingCircle: {fileID: 4829934610771583608}
