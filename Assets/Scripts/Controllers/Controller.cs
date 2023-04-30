@@ -8,9 +8,11 @@ public abstract class Controller : MonoBehaviour
     public Pawn pawn;
     public TextMeshProUGUI UIScore;
     public TextMeshProUGUI UILives;
+    public TextMeshProUGUI UITreasure;
 
     public float lives;
     public float score;
+    public int treasureLeft;
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -30,6 +32,7 @@ public abstract class Controller : MonoBehaviour
         
     }
 
+    public abstract void UpdateTreasure();
     public abstract void RespawnPlayer();
     public abstract void AddToScore(float amount);
     public abstract void RemoveScore(float amount);

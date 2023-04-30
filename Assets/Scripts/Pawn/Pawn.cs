@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,10 @@ public abstract class Pawn : MonoBehaviour
     public float moveSpeed;
     public float sneakSpeed;
     public float turnSpeed;
+    
+    public bool isPlaying = false;
+    public ParticleSystem smokeScreen;
+    
     public Mover mover;
     public Controller controller;
     public Image hearingCircle;
@@ -33,4 +38,6 @@ public abstract class Pawn : MonoBehaviour
     public abstract void RotateTowards(Vector3 targetPosition);
     public abstract void Sneak();
     public abstract void StopSneak();
+    public abstract IEnumerator PlayParticleSystem();
+    
 }

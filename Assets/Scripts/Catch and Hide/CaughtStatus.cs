@@ -25,7 +25,6 @@ public class CaughtStatus : MonoBehaviour
             AudioManager.instance.PlayCaughtSound();
         }
         Controller loseLife = pawn.controller;
-        Debug.Log(source.name + " destroyed " + gameObject.name);
         loseLife.RemoveLives(1);
         Destroy(gameObject);
     }

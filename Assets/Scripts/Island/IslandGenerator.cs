@@ -31,7 +31,7 @@ public class IslandGenerator : MonoBehaviour
 
         currentLevelPrefab = newLevel;
 
-        GameManager.instance.Invoke("SpawnPlayer", 2f);
+        GameManager.instance.Invoke("SpawnPlayer", 2.5f);
         GameManager.instance.Invoke("SpawnAI", 0.1f);
         GameManager.instance.Invoke("SpawnTreasure", 0.1f);
 

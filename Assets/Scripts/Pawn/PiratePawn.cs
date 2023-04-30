@@ -8,6 +8,8 @@ public class PiratePawn : Pawn
     public int rotateNoise;
     public int moveNoise;
     public bool isSneaking;
+
+    
     // Start is called before the first frame update
     public override void Start()
     {
@@ -108,28 +110,34 @@ public class PiratePawn : Pawn
             }
         }
     }
+    public override IEnumerator PlayParticleSystem()
+    {
+        // Loop the particle system while the space key is held down.
+        while (Input.GetKey(KeyCode.Space))
+        {
+            smokeScreen.Play();
+            yield return null;
+        }
+    }
 
     public override void Sneak()
     {
         isSneaking = true;
         moveSpeed = sneakSpeed;
-        Debug.Log("sneaking");
+        //Debug.Log("sneaking");
     }
 
     public override void StopSneak()
     {
         isSneaking = false;
         moveSpeed = defaultmoveSpeed;
-        Debug.Log("stop sneaking");
+        //Debug.Log("stop sneaking");
     }
 
     public override void RotateTowards(Vector3 targetPosition)
     {
-        Debug.Log("Rotation check 1");
         Vector3 vectorToTarget = targetPosition - transform.position;
-        Debug.Log("Rotation check 2");
         Quaternion targetRotation = Quaternion.LookRotation(vectorToTarget, Vector3.up);
-        Debug.Log("Rotation check 3");
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
     }
 }

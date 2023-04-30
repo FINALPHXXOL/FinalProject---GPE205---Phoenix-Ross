@@ -13,6 +13,7 @@ public class TreasurePowerup : Powerup
         {
             if (addScore.controller != null)
             {
+                addScore.controller.Invoke("UpdateTreasure", 0.1f);
                 addScore.controller.AddToScore(scoreToAdd);
             }
         }

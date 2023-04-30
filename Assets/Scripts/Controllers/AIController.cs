@@ -116,7 +116,7 @@ public class AIController : Controller
         this.pawn = newPawn;
         newPawn.controller = this;
 
-        Debug.Log("Pirate respawned.");
+        
 
     }
 
@@ -411,10 +411,10 @@ public class AIController : Controller
     }
     public bool CanSee(GameObject target)
     {
-        Debug.Log("Ray1");
+        
         if (pawn != null)
         {
-            Debug.Log("Ray2");
+            
             // We use the location of our target in a number of calculations - store it in a variable for easy access.
             Vector3 targetPosition = target.transform.position;
 
@@ -439,7 +439,7 @@ public class AIController : Controller
             // if that angle is less than our field of view
             if (angleToTarget < fieldOfView)
             {
-                Debug.Log("Ray3");
+                
                 // Create a variable to hold a ray from our position to the target
                 Ray rayToTarget = new Ray();
 
@@ -455,14 +455,14 @@ public class AIController : Controller
                 Debug.DrawRay(rayToTarget.origin, rayToTarget.direction, color, 2f, false);
                 if (Physics.Raycast(rayToTarget, out hitInfo, Mathf.Infinity)) //Mathf.Infinity))
                 {
-                    Debug.Log("Ray4");
+                    
                     Physics.IgnoreCollision(pawn.GetComponent<Collider>(), hitInfo.collider);
                     
                     Debug.DrawLine(rayToTarget.origin, rayToTarget.direction, color, 2f, false);
                     // ... and that something is our target 
                     if (hitInfo.collider.gameObject == target)
                     {
-                        Debug.Log("Ray5");
+                        
                         // return true 
                         //    -- note that this will exit out of the function, so anything after this functions like an else
                         return true;
@@ -470,7 +470,7 @@ public class AIController : Controller
                 }
             }
         }
-        Debug.Log("RayFalse");
+        
         // return false
         //   -- note that because we returned true when we determined we could see the target, 
         //      this will only run if we hit nothing or if we hit something that is not our target.
@@ -480,5 +480,10 @@ public class AIController : Controller
 
     }
     #endregion Transitions
+
+    public override void UpdateTreasure()
+    {
+
+    }
 
 }

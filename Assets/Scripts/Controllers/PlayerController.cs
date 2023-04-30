@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using TMPro;
 using UnityEngine;
 
 public class PlayerController : Controller
@@ -24,7 +25,15 @@ public class PlayerController : Controller
 
         base.Start();
 
-
+        if (UILives != null)
+        {
+            UILives.text = "" + lives;
+        }
+        treasureLeft = GameManager.instance.treasure.Count;
+        if (UITreasure != null)
+        {
+            UITreasure.text = "" + treasureLeft;
+        }
 
     }
 
@@ -60,7 +69,7 @@ public class PlayerController : Controller
         this.pawn = newPawn;
         newPawn.controller = this;
 
-        Debug.Log("Player respawned.");
+        
     }
 
     public override void AddToScore(float amount)
@@ -90,7 +99,7 @@ public class PlayerController : Controller
         }
         if (UILives != null)
         {
-            UILives.text = "Lives: " + lives;
+            UILives.text = "" + lives;
         }
     }
 
@@ -99,20 +108,32 @@ public class PlayerController : Controller
         lives = lives - amount;
         if (lives >= 0)
         {
-            Debug.Log("Player should be respawning.");
             RespawnPlayer();
         }
         else if (lives < 0)
         {
             if (GameManager.instance != null)
             {
-                Debug.Log("GAME OVER!!!!");
+                GameManager.instance.UIGameOver.text = "Game Over...";
                 GameManager.instance.ActivateGameOver();
             }
         }
         if (UILives != null)
         {
-            UILives.text = "Lives: " + lives;
+            UILives.text = "" + lives;
+        }
+    }
+    public override void UpdateTreasure()
+    {
+        treasureLeft = GameManager.instance.treasure.Count;
+        if (UITreasure != null)
+        {
+            UITreasure.text = "" + treasureLeft;
+        }
+        if (treasureLeft <= 0)
+        {
+            GameManager.instance.UIGameOver.text = "YOU WIN!!!";
+            GameManager.instance.ActivateGameOver();
         }
     }
 
@@ -141,11 +162,22 @@ public class PlayerController : Controller
         if (Input.GetKeyDown(sneakKey))
         {
             pawn.Sneak();
+            if (!pawn.isPlaying)
+            {
+                pawn.StartCoroutine(pawn.PlayParticleSystem());
+                pawn.isPlaying = true;
+            }
         }
 
         if (Input.GetKeyUp(sneakKey))
         {
             pawn.StopSneak();
+            if (pawn.isPlaying)
+            {
+                StopCoroutine(pawn.PlayParticleSystem());
+                pawn.smokeScreen.Stop();
+                pawn.isPlaying = false;
+            }
         }
     }
 }

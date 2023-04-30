@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.VisualScripting;
 using static UnityEditor.Experimental.GraphView.GraphView;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -45,6 +46,8 @@ public class GameManager : MonoBehaviour
     public GameObject CreditsScreenStateObject;
     public GameObject GameplayStateObject;
     public GameObject GameOverScreenStateObject;
+
+    public TextMeshProUGUI UIGameOver;
     #endregion Variables
 
     // Game States
@@ -72,7 +75,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         ActivateTitleScreen();
-        
+
     }
 
     private void DeactivateAllStates()
@@ -88,12 +91,12 @@ public class GameManager : MonoBehaviour
 
     public void QuitTheGame()
     {
-#if UNITY_STANDALONE
+    #if UNITY_STANDALONE
         Application.Quit();
-#endif
-#if UNITY_EDITOR
+    #endif
+    #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-#endif
+    #endif
     }
 
     public void ActivateTitleScreen()
@@ -146,7 +149,7 @@ public class GameManager : MonoBehaviour
 
     public void ActivateGameOver()
     {
-        Debug.Log("Why");
+        
         DestroyAllPlayerControllers();
         DestroyAllAIControllers();
         DestroyAllPawns();
@@ -158,7 +161,7 @@ public class GameManager : MonoBehaviour
         {
             AllMenus.SetActive(true);
         }
-        
+
         // Deactivate all states
         DeactivateAllStates();
         // Activate the game over screen
@@ -216,7 +219,7 @@ public class GameManager : MonoBehaviour
         T randomT = list[UnityEngine.Random.Range(0, list.Count)];
 
         GameObject randomObj = randomT.gameObject;
-        
+
         Transform itemTransform = randomObj.transform;
 
         if (!(randomT is PlayerSpawnPoint))
@@ -225,7 +228,7 @@ public class GameManager : MonoBehaviour
             Destroy(randomObj);
         }
 
-            return itemTransform;
+        return itemTransform;
     }
 
     public void SpawnPlayer()
@@ -271,9 +274,9 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < captainCount; i++)
         {
-            
+
             enemyAISpawnTransform = FindRandomSpawn<CaptainSpawnPoint>(captainSpawns);
-            
+
 
             GameObject newAIObj = Instantiate(AICaptainPrefab, Vector3.zero, Quaternion.identity);
             GameObject newPawnObj = Instantiate(CaptainPawnPrefab, enemyAISpawnTransform.position, enemyAISpawnTransform.rotation);
@@ -295,7 +298,7 @@ public class GameManager : MonoBehaviour
 
             newController.isPatrolLoop = true;
         }
-        
+
     }
 
     public void SpawnTreasure()

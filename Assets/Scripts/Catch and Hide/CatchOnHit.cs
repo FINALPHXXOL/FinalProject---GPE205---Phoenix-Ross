@@ -25,7 +25,7 @@ public class CatchOnHit : MonoBehaviour
                 {
                     if (otherStatus != null)
                     {
-                        Debug.Log(otherStatus.name);
+                        //Debug.Log(otherStatus.name);
                         //AudioSource.PlayClipAtPoint(hitExplode, otherHealth.transform.position, 0f);
                         otherStatus.Caught(owner);
                     }

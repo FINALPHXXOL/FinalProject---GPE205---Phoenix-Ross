@@ -38,7 +38,6 @@ public class NoiseMaker : MonoBehaviour
     {
         if (amount >= volumeDistance)
         {
-            Debug.Log("Is it working");
             volumeDistance = amount;
             if (noiseCircle != null)
             {
