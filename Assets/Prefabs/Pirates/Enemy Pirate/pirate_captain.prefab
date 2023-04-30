@@ -157,6 +157,8 @@ MonoBehaviour:
   moveSpeed: 0
   sneakSpeed: 0
   turnSpeed: 100
+  isPlaying: 0
+  smokeScreen: {fileID: 0}
   mover: {fileID: -5926979160120552357}
   controller: {fileID: 0}
   hearingCircle: {fileID: 8688898347436986568}
@@ -178,7 +180,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &-1196780583193420271
 MonoBehaviour:
   m_ObjectHideFlags: 0
