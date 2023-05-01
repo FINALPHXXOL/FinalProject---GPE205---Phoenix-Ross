@@ -25,7 +25,7 @@ public class AICaptain : AIController
                 TargetNearestPirate();
                 DoChaseState();
                 // Check for transitions
-                if (target == null || (!IsDistanceLessThan(target, (viewDistance * 1.25f)) || (!CanSee(target))) && !CanHear(target))
+                if (target == null || (!IsDistanceLessThan(target, (viewDistance * 1.25f)) && (!CanSee(target))) && !CanHear(target))
                 {
                     ChangeState(AIState.Patrol);
                 }
